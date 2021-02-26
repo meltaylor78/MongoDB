@@ -1,0 +1,34 @@
+
+Command to open the DB.
+mongo "mongodb+srv://myfirstcluster.vw7mm.mongodb.net/myFirstDatabase" --username root
+
+cls - clear the command window
+coll.find() - returns all the recods
+coll.find({gender:"f"}) - searches for all records with f in the gender field. 
+    to add multiple search criteria, serperate with a comma [i.e coll.find({gender:"m", nationality:"british"});]
+
+Using the $or - in the below example, it searches for f(famale) and america or Irish.
+coll.find({gender:"f", $or: [{nationality:"american"}, {nationality:"irish"}]});
+
+
+Adding sort method. 1 = Acending    -1 = decending
+
+coll.find({gender:"f", $or: [{nationality:"american"}, {nationality:"irish"}]}).sort({nationlity:1});
+
+________________________________________________________________________________________________________________________
+Update the first matching record with nationality == "irish" to have hair_color == "blue":
+
+    coll.update({nationality: "irish"}, {$set: {hair_color: "blue"}});       Updates first found record only
+
+Update all matching records with nationality == "irish" to have hair_color == "purple":
+
+    coll.update({nationality: "irish"}, {$set: {hair_color: "purple"}},{multi:true});
+
+Delete a record matching: First: "kate", Last: "bush":
+
+    coll.remove({first: "kate", last: "bush"});
+
+Delete all records from the collection:
+
+    coll.remove();  Do not use.. deletes all records from the DB. 
+    
